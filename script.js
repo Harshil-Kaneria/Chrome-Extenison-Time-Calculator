@@ -27,7 +27,7 @@ function remaining_time_calculator(){
 				remaining_time.value = "Time is Over"
 				clearInterval(counter_interval);
 			}else{
-				remaining_time.value = duration.years() + " years " + duration.days() + " days " + duration.hours() + " hours " + duration.minutes()  + " minutes " + duration.seconds() + " seconds"
+				remaining_time.value =  duration.hours() + ":" + duration.minutes()  + ":" + duration.seconds() + " and " + duration.days() + " days "
 			}
 		}, 1000);
 	
