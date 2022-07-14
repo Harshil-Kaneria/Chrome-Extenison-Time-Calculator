@@ -17,17 +17,21 @@
 		<tr>
 			<td>Total Working Time</td>
 			<td>
-				<input min="0" max="24" class="full_space" type="number" id="work_time_hours" name="work_time_hours" placeholder="Work Time in Hours">
-				<input min="0" max="60" class="full_space" type="number" id="work_time_minutes" name="work_time_minutes" placeholder="Work Time in Minutes">
+				<input value="8" min="0" max="24" class="full_space" type="number" id="work_time_hours" name="work_time_hours" placeholder="Work Time in Hours">
+				<input value="30" min="0" max="60" class="full_space" type="number" id="work_time_minutes" name="work_time_minutes" placeholder="Work Time in Minutes">
 			</td>
 		</tr>
 		<tr>
 			<td>Break Time</td>
-			<td><input min="0" class="full_space" type="number" id="break_time" name="break_time" placeholder="Break Time in Minute"></td>
+			<td><input value="30" min="0" class="full_space" type="number" id="break_time" name="break_time" placeholder="Break Time in Minute"></td>
 		</tr>
 		<tr>
 			<td>Finish At</td>
 			<td><input class="full_space" type="text" id="finish_at" name="finish_at" placeholder="" readonly disabled></td>
+		</tr>
+		<tr>
+			<td>Remaining Time</td>
+			<td><input class="full_space" type="text" id="remaining_time" name="remaining_time" placeholder="" readonly disabled></td>
 		</tr>
 		<tr>
 			<td colspan="2">
@@ -38,7 +42,7 @@
 		</tr>
 	</table>
 
-
-	<script src="script.js"></script>
+	<script src="./moment.min.js"></script>
+	<script src="./script.js"></script>
 </body>
 </html>

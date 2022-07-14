@@ -1,39 +1,37 @@
+let final_time = '';
+
 function calculate_time(){
-	var start_time = document.querySelector('#start_time');
-	var work_time_hours = document.querySelector('#work_time_hours');
-	var work_time_minutes = document.querySelector('#work_time_minutes');
-	var break_time = document.querySelector('#break_time');
-	var finish_at = document.querySelector('#finish_at');
+    let start_time = document.querySelector('#start_time');
+    let work_time_hours = document.querySelector('#work_time_hours');
+    let work_time_minutes = document.querySelector('#work_time_minutes');
+    let break_time = document.querySelector('#break_time');
+    let finish_at = document.querySelector('#finish_at');
 	
-	var hours = parseInt(start_time.value.split(':')[0]);
-    var minutes = parseInt(start_time.value.split(':')[1]);
+    break_time.value=="" ? break_time.value = 0 : '';
+    work_time_minutes.value=="" ? work_time_minutes.value = 0 : '';
+    work_time_hours.value=="" ? work_time_hours.value = 0 : '';
 
-    if(break_time.value==""){
-		break_time.value = 0;
-    }
-    if(work_time_minutes.value==""){
-		work_time_minutes.value = 0;
-    }
-    if(work_time_hours.value==""){
-		work_time_hours.value = 0;
-    }
+    final_time = moment(start_time.value,"HH:mm");
+    final_time = final_time.add(Number(work_time_hours.value),'hour').add(Number(work_time_minutes.value)+Number(break_time.value),'minutes')
 
-    minutes = minutes + parseInt(break_time.value) + parseInt(work_time_minutes.value);
-    hours += parseInt(work_time_hours.value);
+    finish_at.value = final_time.format('h:mm a Do MMMM YYYY');
+	remaining_time_calculator()
+}
 
-    while(minutes>59){
-    	hours = hours + 1;
-        minutes -= 60;
-    }
-
-    while(hours>23){
-    	hours -= 24;
-    }
-
-    var ampm = hours >= 12 ? 'PM' : 'AM';
-	hours = hours % 12 || 12;
-
-    finish_at.value = hours+":"+minutes+" "+ampm;
+function remaining_time_calculator(){
+	let remaining_time = document.querySelector('#remaining_time');
+	if(final_time!=''){
+		let counter_interval = setInterval(() => {
+			var duration = moment.duration(final_time.diff(moment()));
+			if(duration.asSeconds() <= 0) {
+				remaining_time.value = "Time is Over"
+				clearInterval(counter_interval);
+			}else{
+				remaining_time.value = duration.years() + " years " + duration.days() + " days " + duration.hours() + " hours " + duration.minutes()  + " minutes " + duration.seconds() + " seconds"
+			}
+		}, 1000);
+	
+	}
 }
 
 document.getElementById("calculate_time").onclick = function() {  
