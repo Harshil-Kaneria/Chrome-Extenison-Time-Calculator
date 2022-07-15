@@ -5,44 +5,47 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<meta http-equiv="Content-Security-Policy" content="default-src 'self' data: gap: https://ssl.gstatic.com 'unsafe-eval' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; media-src *; img-src 'self' data: content:;">
 	<title>Time Calculator</title>
-	<link rel="stylesheet" href="style.css">
+	<link rel="stylesheet" href="./assets/bootstrap.min.css">
+	<link rel="stylesheet" href="./assets/style.css">
 </head>
-<body>
-	
-	<table>
-		<tr>
-			<td>Start Time</td>
-			<td><input class="full_space" type="time" id="start_time" name="start_time" value="09:00"></td>
-		</tr>
-		<tr>
-			<td>Total Working Time</td>
-			<td>
-				<input value="8" min="0" max="24" class="full_space" type="number" id="work_time_hours" name="work_time_hours" placeholder="Work Time in Hours">
-				<input value="30" min="0" max="60" class="full_space" type="number" id="work_time_minutes" name="work_time_minutes" placeholder="Work Time in Minutes">
-			</td>
-		</tr>
-		<tr>
-			<td>Break Time</td>
-			<td><input value="30" min="0" class="full_space" type="number" id="break_time" name="break_time" placeholder="Break Time in Minute"></td>
-		</tr>
-		<tr>
-			<td>Finish At</td>
-			<td><input class="full_space" type="text" id="finish_at" name="finish_at" placeholder="" readonly disabled></td>
-		</tr>
-		<tr>
-			<td>Remaining Time</td>
-			<td><input class="full_space" type="text" id="remaining_time" name="remaining_time" placeholder="" readonly disabled></td>
-		</tr>
-		<tr>
-			<td colspan="2">
-				<center>
-					<button id="calculate_time">Submit</button>
-				</center>
-			</td>
-		</tr>
-	</table>
+<body class="main_body bg-light">
 
-	<script src="./moment.min.js"></script>
-	<script src="./script.js"></script>
+	<div class="row p-2 mt-4">
+		<div class="col-6 textOnInput">
+			<label>Start Time</label>
+            <input class="form-control" type="time" id="start_time" name="start_time" value="09:00">
+		</div>
+		<div class="col-6 textOnInput">
+			<label>Break Time</label>
+            <input value="30" min="0" class="form-control" type="number" id="break_time" name="break_time" placeholder="Break Time in Minute">
+		</div>
+	</div>
+	<div class="row p-2 mt-4">
+		<div class="col-6 textOnInput">
+			<label>Work Time in Hours</label>
+            <input value="8" min="0" max="24" class="form-control" type="number" id="work_time_hours" name="work_time_hours" placeholder="Work Time in Hours">
+		</div>
+		<div class="col-6 textOnInput">
+			<label>Work Time in Minutes</label>
+            <input value="30" min="0" max="60" class="form-control" type="number" id="work_time_minutes" name="work_time_minutes" placeholder="Work Time in Minutes">
+		</div>
+	</div>
+	<div class="row p-2 mt-4">
+		<div class="col-6 textOnInput">
+			<label>Finish At</label>
+            <input class="form-control" type="text" id="finish_at" name="finish_at" placeholder="" readonly disabled>
+		</div>
+		<div class="col-6 textOnInput">
+			<label>Remaining Time</label>
+            <input class="form-control" type="text" id="remaining_time" name="remaining_time" placeholder="" readonly disabled>
+		</div>
+	</div>
+	<div class="row p-2 mt-4">
+		<button class="btn btn-info mx-auto" id="calculate_time">Calculate</button>
+	</div>
+
+
+	<script src="./assets/moment.min.js"></script>
+	<script src="./assets/script.js"></script>
 </body>
 </html>
