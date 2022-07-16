@@ -40,8 +40,30 @@
             <input class="form-control" type="text" id="remaining_time" name="remaining_time" placeholder="" readonly disabled>
 		</div>
 	</div>
+	<hr>
+	<div class="row p-2 mt-4">
+		<div class="col-6 textOnInput">
+			<label>Leave Time (Optional)</label>
+            <input class="form-control" type="time" id="leave_time" name="leave_time">
+		</div>
+		<div class="col-6 textOnInput">
+			<label>Remaining Leave Time</label>
+            <input class="form-control" type="text" id="remaining_leave_time" name="remaining_leave_time" placeholder="" readonly disabled>
+		</div>
+	</div>
+	<div class="row p-2 mt-4">
+		<div class="col-6 textOnInput">
+			<label>Total Working Time</label>
+            <input class="form-control" type="text" id="total_working_time" name="total_working_time" placeholder="" readonly disabled>
+		</div>
+		<div class="col-6 textOnInput">
+			<label>Total Access Time</label>
+            <input class="form-control" type="text" id="total_access_time" name="total_access_time" placeholder="" readonly disabled>
+		</div>
+	</div>
 	<div class="row p-2 mt-4">
 		<button class="btn btn-info mx-auto" id="calculate_time">Calculate</button>
+		<button class="btn btn-danger mx-auto" id="reset_time">Reset</button>
 	</div>
 
 
