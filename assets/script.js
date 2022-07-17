@@ -1,6 +1,8 @@
 let counter_interval = '';
 let final_time = '';
 let exit_time = '';
+let total_working_time_input_duration = '';
+let access_time_input_duration = '';
 let start_time = document.querySelector('#start_time');
 let work_time_hours = document.querySelector('#work_time_hours');
 let work_time_minutes = document.querySelector('#work_time_minutes');
@@ -27,10 +29,17 @@ function calculate_time(){
 function total_working_time(){
 	if(leave_time.value!="" && final_time!=""){
 		exit_time = moment(leave_time.value,"HH:mm").add(1,'minutes').subtract(1,'minutes')
-		let total_working_time_input_duration = moment.duration(exit_time.diff(moment(start_time.value,"HH:mm").add(Number(break_time.value),'minutes')))
+		total_working_time_input_duration = moment.duration(exit_time.diff(moment(start_time.value,"HH:mm").add(Number(break_time.value),'minutes')))
 
 		total_working_time_input.value = total_working_time_input_duration.hours() + ":" + total_working_time_input_duration.minutes()
+
+		calculate_access_time();
 	}
+}
+
+function calculate_access_time(){
+	access_time_input_duration = moment.duration(exit_time.diff(final_time))
+	total_access_time_input.value = access_time_input_duration.hours() + " : " + access_time_input_duration.minutes()
 }
 
 function remaining_time_set(){
