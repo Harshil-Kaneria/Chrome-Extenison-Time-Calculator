@@ -1,4 +1,5 @@
 let counter_interval = '';
+let counter_interval_remaining_leave_time = '';
 let final_time = '';
 let exit_time = '';
 let total_working_time_input_duration = '';
@@ -12,6 +13,7 @@ let total_working_time_input = document.querySelector("#total_working_time");
 let total_access_time_input = document.querySelector("#total_access_time");
 let leave_time = document.querySelector("#leave_time");
 let finish_at = document.querySelector('#finish_at');
+let remaining_leave_time = document.querySelector("#remaining_leave_time");
 
 function calculate_time(){
     break_time.value=="" ? break_time.value = 0 : '';
@@ -34,12 +36,33 @@ function total_working_time(){
 		total_working_time_input.value = total_working_time_input_duration.hours() + ":" + total_working_time_input_duration.minutes()
 
 		calculate_access_time();
+		calculate_remaining_leave_time();
 	}
 }
 
 function calculate_access_time(){
 	access_time_input_duration = moment.duration(exit_time.diff(final_time))
 	total_access_time_input.value = access_time_input_duration.hours() + " : " + access_time_input_duration.minutes()
+}
+
+function calculate_remaining_leave_time_set(){
+	var duration = moment.duration(exit_time.diff(moment()));
+	if(duration.asSeconds() <= 0) {
+		localStorage.removeItem("time_calculator_leave_time");
+		remaining_leave_time.value = "Time is Over"
+		clearInterval(counter_interval_remaining_leave_time);
+	}else{
+		remaining_leave_time.value =  duration.hours() + ":" + duration.minutes()  + ":" + duration.seconds() + " and " + duration.days() + " days "
+	}
+}
+
+function calculate_remaining_leave_time(){
+	if(leave_time.value!=""){
+		calculate_remaining_leave_time_set();
+		counter_interval_remaining_leave_time = setInterval(() => {
+			calculate_remaining_leave_time_set()
+		}, 1000);
+	}
 }
 
 function remaining_time_set(){
