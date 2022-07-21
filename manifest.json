@@ -1,7 +1,7 @@
 {
   "name": "Time Calculator",
   "description": "A Simple Time Calculator For Celebration Time Calculate.",
-  "version": "1.1",
+  "version": "1.2",
   "manifest_version": 3,
   "action": {
     "default_popup": "index.html",
