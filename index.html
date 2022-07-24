@@ -3,7 +3,6 @@
 <head>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<meta http-equiv="Content-Security-Policy" content="default-src 'self' data: gap: https://ssl.gstatic.com 'unsafe-eval' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; media-src *; img-src 'self' data: content:;">
 	<title>Time Calculator</title>
 	<link rel="stylesheet" href="./assets/bootstrap.min.css">
 	<link rel="stylesheet" href="./assets/style.css">
@@ -65,13 +64,12 @@
 		<button class="btn btn-info mx-auto" id="calculate_time">Calculate</button>
 		<button class="btn btn-danger mx-auto" id="reset_time">Reset</button>
 	</div>
-	<div class="row p-2 d-none">
+	<div class="row p-2">
 		<div class="mx-auto">
 			<input type="checkbox" id="notification_display" name="notification_display" value="notification">
 			<label for="notification_display"> Show Notification</label>
 		</div>
 	</div>
-	
 
 	<script src="./assets/moment.min.js"></script>
 	<script src="./assets/script.js"></script>

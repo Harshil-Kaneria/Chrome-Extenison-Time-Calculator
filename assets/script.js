@@ -21,14 +21,14 @@ function calculate_time(){
 
 	show_notification = false;
 
-    break_time.value=="" ? break_time.value = 0 : '';
-    work_time_minutes.value=="" ? work_time_minutes.value = 0 : '';
-    work_time_hours.value=="" ? work_time_hours.value = 0 : '';
+	break_time.value=="" ? break_time.value = 0 : '';
+	work_time_minutes.value=="" ? work_time_minutes.value = 0 : '';
+	work_time_hours.value=="" ? work_time_hours.value = 0 : '';
 
-    final_time = moment(start_time.value,"HH:mm");
-    final_time = final_time.add(Number(work_time_hours.value),'hour').add(Number(work_time_minutes.value)+Number(break_time.value),'minutes')
+	final_time = moment(start_time.value,"HH:mm");
+	final_time = final_time.add(Number(work_time_hours.value),'hour').add(Number(work_time_minutes.value)+Number(break_time.value),'minutes')
 
-    finish_at.value = final_time.format('h:mm a');
+	finish_at.value = final_time.format('h:mm a');
 	remaining_time_calculator()
 	total_working_time()
 }
@@ -52,9 +52,10 @@ function calculate_access_time(){
 
 function calculate_remaining_leave_time_set(){
 	var duration = moment.duration(exit_time.diff(moment()));
-	if(Math.trunc(duration.asSeconds()) == 0 && leave_time.value!="" && show_notification==false && notification_display.checked){
+	if(leave_time.value!="" && show_notification==false && notification_display.checked){
+		console.log(duration.asMinutes());
 		show_notification = true
-		generate_notification()
+		generate_notification(duration.asMinutes())
 	}
 	if(duration.asSeconds() <= 0) {
 		// localStorage.removeItem("time_calculator_leave_time");
@@ -77,9 +78,10 @@ function calculate_remaining_leave_time(){
 
 function remaining_time_set(){
 	var duration = moment.duration(final_time.diff(moment()));
-	if(Math.trunc(duration.asSeconds()) == 0 && leave_time.value=="" && show_notification==false && notification_display.checked){
+	if(leave_time.value=="" && show_notification==false && notification_display.checked){
+		console.log(duration.asMinutes());
 		show_notification = true
-		generate_notification()
+		generate_notification(duration.asMinutes())
 	}
 	if(duration.asSeconds() <= 0) {
 		// localStorage.removeItem("time_calculator");
@@ -117,16 +119,19 @@ function reset_time(){
 	location.reload();
 }
 
-function generate_notification(){
-	if (Notification.permission === "granted") {
-		notification();
-	} else if (Notification.permission !== "denied") {
-		Notification.requestPermission().then(permission => {
-			if(permission === "granted"){
-				notification();
-			}
-		});
-	}  
+function generate_notification(time=0){
+	// if (Notification.permission === "granted") {
+	// 	notification();
+	// } else if (Notification.permission !== "denied") {
+	// 	Notification.requestPermission().then(permission => {
+	// 		if(permission === "granted"){
+	// 			notification();
+	// 		}
+	// 	});
+	// }  
+	if(time){
+		chrome.runtime.sendMessage({ time });
+	}
 }
 
 function notification(){

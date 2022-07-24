@@ -1,10 +1,18 @@
 {
-  "name": "Time Calculator",
-  "description": "A Simple Time Calculator For Celebration Time Calculate.",
-  "version": "1.2",
-  "manifest_version": 3,
-  "action": {
-    "default_popup": "index.html",
-    "default_icon": "icon.png"
-  }
+	"name": "Time Calculator",
+	"description": "A Simple Time Calculator For Celebration Time Calculate.",
+	"version": "1.2",
+	"manifest_version": 3,
+	"background": {
+        "service_worker": "./assets/background.js"
+    },
+	"action": {
+		"default_popup": "index.html",
+		"default_icon": "icon.png"
+	},
+	"permissions": [
+		"notifications",
+        "storage",
+        "alarms"
+	]
 }
