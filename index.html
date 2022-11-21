@@ -39,6 +39,12 @@
             <input class="form-control" type="text" id="remaining_time" name="remaining_time" placeholder="" readonly disabled>
 		</div>
 	</div>
+	<div class="row p-2">
+		<div class="col-12">
+			<div class="progress" id="remaining_time_progress">
+			</div>
+		</div>
+	</div>
 	<hr>
 	<div class="row p-2 mt-4">
 		<div class="col-6 textOnInput">
@@ -60,7 +66,13 @@
             <input class="form-control" type="text" id="total_access_time" name="total_access_time" placeholder="" readonly disabled>
 		</div>
 	</div>
-	<div class="row p-2 mt-4">
+	<div class="row p-2">
+		<div class="col-12">
+			<div class="progress" id="remaining_leave_time_progress">
+			</div>
+		</div>
+	</div>
+	<div class="row p-2">
 		<button class="btn btn-info mx-auto" id="calculate_time">Calculate</button>
 		<button class="btn btn-danger mx-auto" id="reset_time">Reset</button>
 	</div>

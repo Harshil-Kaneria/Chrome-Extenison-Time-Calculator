@@ -15,7 +15,25 @@ let leave_time = document.querySelector("#leave_time");
 let finish_at = document.querySelector('#finish_at');
 let remaining_leave_time = document.querySelector("#remaining_leave_time");
 let notification_display = document.querySelector("#notification_display");
+let remaining_time_progress = document.querySelector("#remaining_time_progress");
+let remaining_leave_time_progress = document.querySelector("#remaining_leave_time_progress");
 let show_notification = false;
+
+function progress_bar_html_generator(percentage=""){
+	if(percentage==""){
+		return ''
+	}
+	return `
+	<div class="progress-bar bg-success" role="progressbar" style="width: ${percentage}%;" aria-valuenow="${percentage}" aria-valuemin="0" aria-valuemax="100">${percentage}%</div>
+	`;
+}
+
+function get_percentage(total="",current=""){
+	if(total=="" || current==""){
+		return 0;
+	}
+	return ((current*100)/total).toFixed(2)
+}
 
 function calculate_time(){
 
@@ -26,7 +44,9 @@ function calculate_time(){
 	work_time_hours.value=="" ? work_time_hours.value = 0 : '';
 
 	final_time = moment(start_time.value,"HH:mm");
+	
 	final_time = final_time.add(Number(work_time_hours.value),'hour').add(Number(work_time_minutes.value)+Number(break_time.value),'minutes')
+	
 
 	finish_at.value = final_time.format('h:mm a');
 	remaining_time_calculator()
@@ -53,7 +73,6 @@ function calculate_access_time(){
 function calculate_remaining_leave_time_set(){
 	var duration = moment.duration(exit_time.diff(moment()));
 	if(leave_time.value!="" && show_notification==false && notification_display.checked){
-		console.log(duration.asMinutes());
 		show_notification = true
 		generate_notification(duration.asMinutes())
 	}
@@ -61,8 +80,12 @@ function calculate_remaining_leave_time_set(){
 		// localStorage.removeItem("time_calculator_leave_time");
 		// remaining_leave_time.value = "Time is Over"
 		// clearInterval(counter_interval_remaining_leave_time);
+		remaining_leave_time_progress.innerHTML = progress_bar_html_generator("100")
 		remaining_leave_time.value =  duration.hours() + ":" + duration.minutes()  + ":" + duration.seconds()
 	}else{
+		let startting_main_time = moment(start_time.value,"HH:mm")
+		let percentage = get_percentage(moment.duration(exit_time.diff(startting_main_time)).asSeconds(),moment.duration(moment().diff(startting_main_time)).asSeconds())
+		remaining_leave_time_progress.innerHTML = progress_bar_html_generator(percentage)
 		remaining_leave_time.value =  duration.hours() + ":" + duration.minutes()  + ":" + duration.seconds()
 	}
 }
@@ -79,7 +102,6 @@ function calculate_remaining_leave_time(){
 function remaining_time_set(){
 	var duration = moment.duration(final_time.diff(moment()));
 	if(leave_time.value=="" && show_notification==false && notification_display.checked){
-		console.log(duration.asMinutes());
 		show_notification = true
 		generate_notification(duration.asMinutes())
 	}
@@ -91,8 +113,12 @@ function remaining_time_set(){
 		// localStorage.removeItem("time_calculator_break_time");
 		// remaining_time.value = "Time is Over"
 		// clearInterval(counter_interval);
+		remaining_time_progress.innerHTML = progress_bar_html_generator("100")
 		remaining_time.value =  duration.hours() + ":" + duration.minutes()  + ":" + duration.seconds()
 	}else{
+		let startting_main_time = moment(start_time.value,"HH:mm")
+		let percentage = get_percentage(moment.duration(final_time.diff(startting_main_time)).asSeconds(),moment.duration(moment().diff(startting_main_time)).asSeconds())
+		remaining_time_progress.innerHTML = progress_bar_html_generator(percentage)
 		remaining_time.value =  duration.hours() + ":" + duration.minutes()  + ":" + duration.seconds()
 	}
 }
