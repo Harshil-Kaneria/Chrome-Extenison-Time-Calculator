@@ -23,9 +23,21 @@ function progress_bar_html_generator(percentage=""){
 	if(percentage==""){
 		return ''
 	}
-	return `
-	<div class="progress-bar bg-success" role="progressbar" style="width: ${percentage}%;" aria-valuenow="${percentage}" aria-valuemin="0" aria-valuemax="100">${percentage}%</div>
-	`;
+
+	if(percentage<35){
+		return `
+			<div class="progress-bar bg-danger" role="progressbar" style="width: ${percentage}%;" aria-valuenow="${percentage}" aria-valuemin="0" aria-valuemax="100">${percentage}%</div>
+		`;
+	}else if(percentage>=35 &&  percentage<75){
+		return `
+			<div class="progress-bar bg-warning" role="progressbar" style="width: ${percentage}%;" aria-valuenow="${percentage}" aria-valuemin="0" aria-valuemax="100">${percentage}%</div>
+		`;
+	}else{
+		return `
+			<div class="progress-bar bg-success" role="progressbar" style="width: ${percentage}%;" aria-valuenow="${percentage}" aria-valuemin="0" aria-valuemax="100">${percentage}%</div>
+		`;
+	}
+
 }
 
 function get_percentage(total="",current=""){
@@ -80,7 +92,7 @@ function calculate_remaining_leave_time_set(){
 		// localStorage.removeItem("time_calculator_leave_time");
 		// remaining_leave_time.value = "Time is Over"
 		// clearInterval(counter_interval_remaining_leave_time);
-		remaining_leave_time_progress.innerHTML = progress_bar_html_generator("100")
+		remaining_leave_time_progress.innerHTML = progress_bar_html_generator("100.00")
 		remaining_leave_time.value =  duration.hours() + ":" + duration.minutes()  + ":" + duration.seconds()
 	}else{
 		let startting_main_time = moment(start_time.value,"HH:mm")
@@ -113,7 +125,7 @@ function remaining_time_set(){
 		// localStorage.removeItem("time_calculator_break_time");
 		// remaining_time.value = "Time is Over"
 		// clearInterval(counter_interval);
-		remaining_time_progress.innerHTML = progress_bar_html_generator("100")
+		remaining_time_progress.innerHTML = progress_bar_html_generator("100.00")
 		remaining_time.value =  duration.hours() + ":" + duration.minutes()  + ":" + duration.seconds()
 	}else{
 		let startting_main_time = moment(start_time.value,"HH:mm")
