@@ -19,22 +19,34 @@ let remaining_time_progress = document.querySelector("#remaining_time_progress")
 let remaining_leave_time_progress = document.querySelector("#remaining_leave_time_progress");
 let show_notification = false;
 
-function progress_bar_html_generator(percentage=""){
+function progress_bar_html_generator(percentage="",time_passed=""){
 	if(percentage==""){
 		return ''
 	}
 
 	if(percentage<35){
 		return `
-			<div class="progress-bar bg-danger" role="progressbar" style="width: ${percentage}%;" aria-valuenow="${percentage}" aria-valuemin="0" aria-valuemax="100">${percentage}%</div>
+			<div class="progress-bar bg-danger" role="progressbar" style="width: ${percentage}%;" aria-valuenow="${percentage}" aria-valuemin="0" aria-valuemax="100">
+			<span class="progress-bar-text">
+				${percentage}%  ${time_passed}
+			</span>
+			</div>
 		`;
 	}else if(percentage>=35 &&  percentage<75){
 		return `
-			<div class="progress-bar bg-warning" role="progressbar" style="width: ${percentage}%;" aria-valuenow="${percentage}" aria-valuemin="0" aria-valuemax="100">${percentage}%</div>
+			<div class="progress-bar bg-warning" role="progressbar" style="width: ${percentage}%;" aria-valuenow="${percentage}" aria-valuemin="0" aria-valuemax="100">
+			<span class="progress-bar-text">
+				${percentage}%  ${time_passed}
+			</span>
+			</div>
 		`;
 	}else{
 		return `
-			<div class="progress-bar bg-success" role="progressbar" style="width: ${percentage}%;" aria-valuenow="${percentage}" aria-valuemin="0" aria-valuemax="100">${percentage}%</div>
+			<div class="progress-bar bg-success" role="progressbar" style="width: ${percentage}%;" aria-valuenow="${percentage}" aria-valuemin="0" aria-valuemax="100">
+			<span class="progress-bar-text">
+				${percentage}%  ${time_passed}
+			</span>
+			</div>
 		`;
 	}
 
@@ -96,8 +108,10 @@ function calculate_remaining_leave_time_set(){
 		remaining_leave_time.value =  duration.hours() + ":" + duration.minutes()  + ":" + duration.seconds()
 	}else{
 		let startting_main_time = moment(start_time.value,"HH:mm")
+		let starting_to_crrent_time = moment.duration((moment().diff(startting_main_time)))
+		starting_to_crrent_time = " - "+starting_to_crrent_time.hours() + ":" + starting_to_crrent_time.minutes()  + ":" + starting_to_crrent_time.seconds();
 		let percentage = get_percentage(moment.duration(exit_time.diff(startting_main_time)).asSeconds(),moment.duration(moment().diff(startting_main_time)).asSeconds())
-		remaining_leave_time_progress.innerHTML = progress_bar_html_generator(percentage)
+		remaining_leave_time_progress.innerHTML = progress_bar_html_generator(percentage,starting_to_crrent_time)
 		remaining_leave_time.value =  duration.hours() + ":" + duration.minutes()  + ":" + duration.seconds()
 	}
 }
@@ -129,8 +143,10 @@ function remaining_time_set(){
 		remaining_time.value =  duration.hours() + ":" + duration.minutes()  + ":" + duration.seconds()
 	}else{
 		let startting_main_time = moment(start_time.value,"HH:mm")
+		let starting_to_crrent_time = moment.duration((moment().diff(startting_main_time)))
+		starting_to_crrent_time = " - "+starting_to_crrent_time.hours() + ":" + starting_to_crrent_time.minutes()  + ":" + starting_to_crrent_time.seconds();
 		let percentage = get_percentage(moment.duration(final_time.diff(startting_main_time)).asSeconds(),moment.duration(moment().diff(startting_main_time)).asSeconds())
-		remaining_time_progress.innerHTML = progress_bar_html_generator(percentage)
+		remaining_time_progress.innerHTML = progress_bar_html_generator(percentage,starting_to_crrent_time)
 		remaining_time.value =  duration.hours() + ":" + duration.minutes()  + ":" + duration.seconds()
 	}
 }
@@ -179,7 +195,23 @@ function notification(){
 	})
 }
 
+function set_currnet_date_time(){
+
+	const moment_current_time = moment()
+	const week_day_number = moment_current_time.isoWeekday()
+	document.getElementById("current_time").innerHTML = moment_current_time.format("hh:mm:ss A")
+	document.getElementById("week_day_"+week_day_number).className = 'badge badge-pill badge-primary'
+
+	setInterval(()=>{
+		const moment_current_time = moment()
+		const week_day_number = moment_current_time.isoWeekday()
+		document.getElementById("current_time").innerHTML = moment_current_time.format("hh:mm:ss A")
+		document.getElementById("week_day_"+week_day_number).className = 'badge badge-pill badge-primary'
+	},1000)
+}
+
 document.addEventListener("DOMContentLoaded", function(event) { 
+	set_currnet_date_time()
 	leave_time.value = localStorage.getItem("time_calculator_leave_time")
 	notification_display.checked = localStorage.getItem("notification_display")=="false" ? false : true
 	if(localStorage.getItem("time_calculator")){

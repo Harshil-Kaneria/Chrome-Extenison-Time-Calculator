@@ -9,7 +9,7 @@
 </head>
 <body class="main_body bg-light">
 
-	<div class="row p-2 mt-4">
+	<div class="row p-1 mt-4">
 		<div class="col-6 textOnInput">
 			<label>Start Time</label>
             <input class="form-control" type="time" id="start_time" name="start_time" value="09:00">
@@ -19,7 +19,7 @@
             <input value="30" min="0" class="form-control" type="number" id="break_time" name="break_time" placeholder="Break Time in Minute">
 		</div>
 	</div>
-	<div class="row p-2 mt-4">
+	<div class="row p-1 mt-4">
 		<div class="col-6 textOnInput">
 			<label>Work Time in Hours</label>
             <input value="8" min="0" max="24" class="form-control" type="number" id="work_time_hours" name="work_time_hours" placeholder="Work Time in Hours">
@@ -29,7 +29,7 @@
             <input value="30" min="0" max="60" class="form-control" type="number" id="work_time_minutes" name="work_time_minutes" placeholder="Work Time in Minutes">
 		</div>
 	</div>
-	<div class="row p-2 mt-4">
+	<div class="row p-1 mt-4">
 		<div class="col-6 textOnInput">
 			<label>Finish At</label>
             <input class="form-control" type="text" id="finish_at" name="finish_at" placeholder="" readonly disabled>
@@ -39,14 +39,14 @@
             <input class="form-control" type="text" id="remaining_time" name="remaining_time" placeholder="" readonly disabled>
 		</div>
 	</div>
-	<div class="row p-2">
+	<div class="row p-1">
 		<div class="col-12">
-			<div class="progress" id="remaining_time_progress">
+			<div class="progress mb-1" id="remaining_time_progress">
 			</div>
 		</div>
 	</div>
 	<hr>
-	<div class="row p-2 mt-4">
+	<div class="row p-1 mt-4">
 		<div class="col-6 textOnInput">
 			<label>Leave Time (Optional)</label>
             <input class="form-control" type="time" id="leave_time" name="leave_time">
@@ -56,7 +56,7 @@
             <input class="form-control" type="text" id="remaining_leave_time" name="remaining_leave_time" placeholder="" readonly disabled>
 		</div>
 	</div>
-	<div class="row p-2 mt-4">
+	<div class="row p-1 mt-4">
 		<div class="col-6 textOnInput">
 			<label>Total Working Time</label>
             <input class="form-control" type="text" id="total_working_time" name="total_working_time" placeholder="" readonly disabled>
@@ -66,21 +66,44 @@
             <input class="form-control" type="text" id="total_access_time" name="total_access_time" placeholder="" readonly disabled>
 		</div>
 	</div>
-	<div class="row p-2">
+	<div class="row p-1">
 		<div class="col-12">
 			<div class="progress" id="remaining_leave_time_progress">
 			</div>
 		</div>
 	</div>
-	<div class="row p-2">
-		<button class="btn btn-info mx-auto" id="calculate_time">Calculate</button>
-		<button class="btn btn-danger mx-auto" id="reset_time">Reset</button>
+	<!-- <div class="row p-1 w-100">
+		<div class="col-6 d-flex p-0">
+			<button class="btn btn-info mx-auto" id="calculate_time">Calculate</button>
+			<button class="btn btn-danger mx-auto" id="reset_time">Reset</button>
+		</div>
+		<div class="col-6 p-0 text-center">
+			<div class="form-control" id="current_time">
+			</div>
+		</div>
+	</div> -->
+	<div class="row p-1">
+		<button class="btn btn-sm btn-info mx-auto" id="calculate_time">Calculate</button>
+		<button class="btn btn-sm btn-danger mx-auto" id="reset_time">Reset</button>
 	</div>
-	<div class="row p-2">
+	<div class="row p-1 pl-4 pr-4">
 		<div class="mx-auto">
 			<input type="checkbox" id="notification_display" name="notification_display" value="notification">
 			<label for="notification_display"> Show Notification</label>
 		</div>
+		<div class="col-6 p-0 text-center">
+			<div class="form-control p-0" id="current_time">
+			</div>
+		</div>
+	</div>
+	<div class="row p-1 d-flex week-row">
+		<div><span id="week_day_1" class="badge badge-pill badge-dark">M</span></div>
+		<div><span id="week_day_2" class="badge badge-pill badge-dark">T</span></div>
+		<div><span id="week_day_3" class="badge badge-pill badge-dark">W</span></div>
+		<div><span id="week_day_4" class="badge badge-pill badge-dark">T</span></div>
+		<div><span id="week_day_5" class="badge badge-pill badge-dark">F</span></div>
+		<div><span id="week_day_6" class="badge badge-pill badge-dark">S</span></div>
+		<div><span id="week_day_7" class="badge badge-pill badge-dark">S</span></div>
 	</div>
 
 	<script src="./assets/moment.min.js"></script>
