@@ -199,13 +199,13 @@ function set_currnet_date_time(){
 
 	const moment_current_time = moment()
 	const week_day_number = moment_current_time.isoWeekday()
-	document.getElementById("current_time").innerHTML = moment_current_time.format("hh:mm:ss A")
+	document.getElementById("current_time").innerHTML = moment_current_time.format("ll hh:mm:ss A")
 	document.getElementById("week_day_"+week_day_number).className = 'badge badge-pill badge-primary'
 
 	setInterval(()=>{
 		const moment_current_time = moment()
 		const week_day_number = moment_current_time.isoWeekday()
-		document.getElementById("current_time").innerHTML = moment_current_time.format("hh:mm:ss A")
+		document.getElementById("current_time").innerHTML = moment_current_time.format("ll hh:mm:ss A")
 		document.getElementById("week_day_"+week_day_number).className = 'badge badge-pill badge-primary'
 	},1000)
 }
